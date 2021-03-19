@@ -10,13 +10,22 @@ public class Kulka {
     private double xSpeed;
     private double xPos;
     private double yPos;
+    private Color color;
 
+    public Color getColor(){
+        return color;
+    }
+
+    public void setColor(Color color){
+        this.color = color;
+    }
 
     Kulka(double xPos, double yPos, double xSpeed, double ySpeed){
         this.xPos = xPos;
         this.yPos = yPos;
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
+        color = Color.WHITESMOKE;
     }
 
     public void checkBoundaryCollision(double xLeft, double yTop, double xRight, double yBottom) {

@@ -96,6 +96,7 @@ public class Pong1 extends Application {
                 lott.nextDouble() * ARENAHEIGHT + ARENAY1,
                 lott.nextDouble() * 20,
                 lott.nextDouble() * 20
+                //    Color.WHITESMOKE
             );
         }
     }
