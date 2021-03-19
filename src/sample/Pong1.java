@@ -43,7 +43,7 @@ public class Pong1 extends Application {
         Timeline t = new Timeline(new KeyFrame(Duration.millis(100), e -> run(gc)));
         t.setCycleCount(Timeline.INDEFINITE);
 
-        initKulka();
+        initKule();
 
         stage.setTitle("Kulki!");
         stage.setScene(new Scene(new StackPane(canvas)));
@@ -77,12 +77,13 @@ public class Pong1 extends Application {
     //private double vy = 4;
 
     private static final int LICZBAKULEK = 10;
+    private Kulka[] kulki = new Kulka[LICZBAKULEK];
     private double[] x = new double[LICZBAKULEK];
     private double[] y = new double[LICZBAKULEK];
     private double[] vx = new double[LICZBAKULEK];
     private double[] vy = new double[LICZBAKULEK];
 
-    private void initKulka(){
+    private void initKule(){
         Random lott = new Random();
 //        x = lott.nextDouble()*ARENAWIDTH+ARENAX1;
 //        y = lott.nextDouble()*ARENAHEIGHT+ARENAY1;
@@ -90,10 +91,12 @@ public class Pong1 extends Application {
 //        vx = 5+lott.nextDouble()* 20;
 //        vy = 5+ lott.nextDouble()*20;
         for(int i = 0; i < LICZBAKULEK; i++){
-            x[i] = lott.nextDouble()*ARENAWIDTH+ARENAX1;
-            y[i] = lott.nextDouble()*ARENAHEIGHT+ARENAY1;
-            vx[i] = 5+ lott.nextDouble()*20;
-            vy[i] = 5+ lott.nextDouble()*20;
+            kulki[i] = new Kulka(
+                lott.nextDouble() * ARENAWIDTH + ARENAX1,
+                lott.nextDouble() * ARENAHEIGHT + ARENAY1,
+                lott.nextDouble() * 20,
+                lott.nextDouble() * 20
+            );
         }
     }
 
@@ -101,8 +104,9 @@ public class Pong1 extends Application {
         gc.setFill(Color.BLACK);
         gc.fillRect(ARENAX1, ARENAY1, ARENAWIDTH, ARENAHEIGHT);
         for(int i = 0; i < LICZBAKULEK; i++) {
-            if ((x[i] - R <= ARENAX1) || ((x[i] + R >= ARENAX2))) vx[i] = -vx[i];
-            if ((y[i] - R <= ARENAY1) || ((y[i] - R >= ARENAY2))) vy[i] = -vy[i];
+            kulki[i].checkBoundaryCollision(ARENAX1, ARENAY1, ARENAX2, ARENAY2);
+            kulki[i].update();
+            kulki[i].draw(gc);
         }
 
         for(int i = 0; i < LICZBAKULEK; i++) {
