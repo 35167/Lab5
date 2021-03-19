@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 
 
 import java.util.EventListener;
+import java.util.Random;
 
 
 public class Pong1 extends Application {
@@ -70,22 +71,33 @@ public class Pong1 extends Application {
     private double x = ARENAX1+ARENAWIDTH/2;
     private double y = ARENAY1+ARENAHEIGHT/2;
 
-    private double vx = 100;
-    private double vy = 100;
+    private double vx = 4;
+    private double vy = 4;
+
+    private void initKulka(){
+        Random lott = new Random();
+        x = lott.nextDouble()*ARENAWIDTH+ARENAX1;
+        y = lott.nextDouble()*ARENAHEIGHT+ARENAY1;
+
+        vx = 5+lott.nextDouble()* 20;
+        vy = 5+ lott.nextDouble()*20;
+    }
 
     private void run(GraphicsContext gc) {
         gc.setFill(Color.BLACK);
-        gc.fillRect(ARENAX1, ARENAY1, ARENAWIDTH, ARENAWIDTH);
+        gc.fillRect(ARENAX1, ARENAY1, ARENAWIDTH, ARENAHEIGHT);
 
-        if((x <= ARENAX1) || ((x>=ARENAX2))) vx = -vx;
-        if((x <= ARENAY1) || ((x>=ARENAY2))) vx = -vx;
+        if((x - R <= ARENAX1) || ((x + R >= ARENAX2))) vx = -vx;
+        if((y - R <= ARENAY1) || ((y - R >= ARENAY2))) vy = -vy;
 
         x += vx;
         y += vy;
 
         gc.setFill(Color.WHITESMOKE);
-        gc.fillOval(ARENAX1+ARENAWIDTH/2,ARENAY1+ARENAHEIGHT/2,2*R, 2*R);
+        gc.fillOval(x-R, y-R,2*R, 2*R);
     }
+
+
 
 
     public static void main(String[] args) {
