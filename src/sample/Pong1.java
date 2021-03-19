@@ -4,8 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.beans.NamedArg;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.event.Event;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -13,11 +12,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import jdk.jfr.Event;
-import jdk.jshell.spi.ExecutionControl;
+import javafx.event.ActionEvent;
 
-import java.awt.event.ActionEvent;
-import java.beans.EventHandler;
+
+
+
 import java.util.EventListener;
 
 
@@ -53,26 +52,26 @@ public class Pong1 extends Application {
 //        gc.setFill(Color.WHITESMOKE);
 //        gc.fillOval(ARENAX1+ARENAWIDTH/2,ARENAY1+ARENAHEIGHT/2,2*R, 2*R);
 
-//        public FeyFrame(@NamedArg("time") Duration time, @NamedArg("onFinished") EventHandler<ActionEvent> onFinished){
-//
-//        }
-//
-//        @FunctionalInterface
-//        public interface EventHandler<T extends Event> extends EventListener{
-//
-//        }
-
         t.play();
 
     }
 
+
+    public void KeyFrame(@NamedArg("time") Duration time, @NamedArg("onFinished") EventHandler<ActionEvent> onFinished){
+
+    }
+
+    @FunctionalInterface
+    public interface EventHandler<T extends Event> extends EventListener{
+        void handle(T event);
+    }
+
+
     private double x = ARENAX1+ARENAWIDTH/2;
     private double y = ARENAY1+ARENAHEIGHT/2;
 
-    private double vx = 5;
-    private double vy = 2;
-
-
+    private double vx = 100;
+    private double vy = 100;
 
     private void run(GraphicsContext gc) {
         gc.setFill(Color.BLACK);
